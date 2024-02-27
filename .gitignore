@@ -3,6 +3,10 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
+# Generated output files
+xout/
+xout_*/
+
 # User-specific files
 *.rsuser
 *.suo
@@ -81,7 +85,6 @@ StyleCopReport.xml
 *.ipdb
 *.pgc
 *.pgd
-*.rsp
 *.sbr
 *.tlb
 *.tli
