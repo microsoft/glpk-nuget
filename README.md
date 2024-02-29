@@ -14,7 +14,7 @@ public API of GLPK.
 In addition to the source for GLPK, this repository contains:
 * Scripts to build GLPK for various platforms (in the [build](https://github.com/microsoft/glpk-nuget/blob/main/build/) directory).
 * A C# file, [content/GlpkNative.cs](https://github.com/microsoft/glpk-nuget/blob/main/content/GlpkNative.cs), containing
-  a C# declarations for some of the public API of GLPK, using PInvoke technology to wrap the native entry points.
+  C# declarations for some of the public API of GLPK, using PInvoke technology to wrap the native entry points.
   This is for convenience and its use is optional for clients of the nuget package.
 * The project [test/GlpkTest.csproj](https://github.com/microsoft/glpk-nuget/blob/main/test) that is used to perform basic
   tests of the GLPK builds.
