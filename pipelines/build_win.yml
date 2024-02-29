@@ -1,0 +1,47 @@
+# The core pipeline definition for GLPK Windows build pipeline.
+
+parameters:
+- name: poolName
+  displayName: Pool name
+  type: string
+- name: buildPlatform
+  displayName: Build platform
+  type: string
+- name: workFolder
+  displayName: Work folder
+  type: string
+
+jobs:
+- job: Build_Win_${{ parameters.buildPlatform }}
+  displayName: Build Glpk for Windows ${{ parameters.buildPlatform }}
+  timeoutInMinutes: 20
+  pool:
+    name: ${{ parameters.poolName }}
+
+  steps:
+  - checkout: self
+    clean: true
+    lfs: true
+
+  - script: Build_Win.cmd ${{ parameters.buildPlatform }}
+    displayName: Build Glpk
+    workingDirectory: $(Build.SourcesDirectory)/build
+
+  - task: DotNetCoreCLI@2
+    displayName: Test Glpk
+    inputs:
+      command: 'test'
+      workingDirectory: $(Build.SourcesDirectory)/test
+      arguments: GlpkTest.csproj /p:Platform=${{ parameters.buildPlatform }}
+
+  - task: CopyFiles@2
+    displayName: 'Copy dll to: $(build.artifactstagingdirectory)/xout_${{ parameters.buildPlatform }}'
+    inputs:
+      SourceFolder: $(Build.SourcesDirectory)/build/xout_${{ parameters.buildPlatform }}/
+      Contents: glpk_5_0.dll
+      TargetFolder: $(build.artifactstagingdirectory)/xout_${{ parameters.buildPlatform }}/
+
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish Artifacts'
+    inputs:
+      ArtifactName: Win_${{ parameters.buildPlatform }}

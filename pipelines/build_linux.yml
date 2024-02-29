@@ -1,0 +1,45 @@
+# The core pipeline definition for GLPK Linux build pipeline.
+
+parameters:
+- name: poolName
+  displayName: Pool name
+  type: string
+- name: workFolder
+  displayName: Work folder
+  type: string
+
+jobs:
+- job: Build_Linux
+  displayName: Build Glpk for Linux
+  timeoutInMinutes: 20
+  pool:
+    name: ${{ parameters.poolName }}
+    demands: ImageOverride -equals MMSUbuntu2204-Compliant
+
+  steps:
+  - checkout: self
+    clean: true
+    lfs: true
+
+  - script: ./bld.sh
+    displayName: Build Glpk
+    workingDirectory: $(Build.SourcesDirectory)/build
+
+  - task: DotNetCoreCLI@2
+    displayName: Test Glpk
+    inputs:
+      command: 'test'
+      workingDirectory: $(Build.SourcesDirectory)/test
+      arguments: GlpkTest.csproj
+
+  - task: CopyFiles@2
+    displayName: 'Copy so to: $(build.artifactstagingdirectory)/xout_linux/src/.libs'
+    inputs:
+      SourceFolder: $(Build.SourcesDirectory)/build/xout_linux/src/.libs
+      Contents: libglpk.so
+      TargetFolder: $(build.artifactstagingdirectory)/xout_linux/src/.libs
+
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish Artifacts'
+    inputs:
+      ArtifactName: Linux

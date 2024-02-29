@@ -3,7 +3,10 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
-# Generated output files
+# Ignore the temp file that get-glpk.cmd pulls.
+*.tar.gz
+
+# Ignore the build directory
 xout/
 xout_*/
 

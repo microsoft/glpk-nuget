@@ -1,0 +1,73 @@
+# Builds GLPK.
+
+variables:
+  PoolName: HostedAgent-Windows2022
+  WorkFolder: '$(System.DefaultWorkingDirectory)'
+
+trigger:
+  branches:
+    include:
+    - refs/heads/main
+  batch: true
+
+name: $(date:yyyyMMdd)$(rev:.r)
+
+jobs:
+- template: ./build_win.yml
+  parameters:
+    buildPlatform: x64
+    poolName: $(PoolName)
+    workFolder: $(WorkFolder)
+
+- template: ./build_win.yml
+  parameters:
+    buildPlatform: x86
+    poolName: $(PoolName)
+    workFolder: $(WorkFolder)
+
+- template: ./build_linux.yml
+  parameters:
+    poolName: $(PoolName)
+    workFolder: $(WorkFolder)
+
+- job: Package
+  dependsOn:
+  - Build_Win_x64
+  - Build_Win_x86
+  - Build_Linux
+  condition: and(succeeded('Build_Win_x64'), succeeded('Build_Win_x86'), succeeded('Build_Linux'))
+  pool:
+    name: $(PoolName)
+  steps:
+  - task: DownloadPipelineArtifact@2
+    displayName: Download Win_x64 artifacts
+    inputs:
+      artifactName: Win_x64
+      targetPath: $(Build.SourcesDirectory)/build/
+
+  - task: DownloadPipelineArtifact@2
+    displayName: Download Win_x86 artifacts
+    inputs:
+      artifactName: Win_x86
+      targetPath: $(Build.SourcesDirectory)/build/
+
+  - task: DownloadPipelineArtifact@2
+    displayName: Download Linux artifacts
+    inputs:
+      artifactName: Linux
+      targetPath: $(Build.SourcesDirectory)/build/
+
+  - script: dir /s "$(Build.SourcesDirectory)/build"
+    displayName: Show build directory
+
+  - task: DotNetCoreCLI@2
+    displayName: Create Nuget
+    inputs:
+      command: 'pack'
+      workingDirectory: $(Build.SourcesDirectory)/package
+      packagesToPack: $(Build.SourcesDirectory)/package/Glpk.Native.csproj
+
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish Nuget'
+    inputs:
+      ArtifactName: Nuget
