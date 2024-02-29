@@ -6,9 +6,9 @@ This repository should **_not_** be used for editing or enhancing GLPK in any wa
 This repository contains the unaltered source for GLPK 5.0 in the [glpk](https://github.com/microsoft/glpk-nuget/blob/main/glpk/) directory.
 This directory was populated by executing the [get-glpk.cmd](https://github.com/microsoft/glpk-nuget/blob/main/get-glpk.cmd) command.
 GLPK is licensed under GPL 3.0, as shown in the [LICENSE.txt](https://github.com/microsoft/glpk-nuget/blob/main/LICENSE.txt) file,
-which is and an unaltered copy of the [glpk/glpk-5.0/COPYING](https://github.com/microsoft/glpk-nuget/blob/main/glpk/glpk-5.0/COPYING) file.
+which is an unaltered copy of the [glpk/glpk-5.0/COPYING](https://github.com/microsoft/glpk-nuget/blob/main/glpk/glpk-5.0/COPYING) file.
 
-See the [GLPK pdf](https://github.com/microsoft/glpk-nuget/blob/main/glpk/glpk-5.0/doc/glpk.pdf) for documentation of the
+See [GLPK pdf](https://github.com/microsoft/glpk-nuget/blob/main/glpk/glpk-5.0/doc/glpk.pdf) for documentation of the
 public API of GLPK.
 
 In addition to the source for GLPK, this repository contains:
@@ -16,11 +16,11 @@ In addition to the source for GLPK, this repository contains:
 * A C# file, [content/GlpkNative.cs](https://github.com/microsoft/glpk-nuget/blob/main/content/GlpkNative.cs), containing
   C# declarations for some of the public API of GLPK, using PInvoke technology to wrap the native entry points.
   This is for convenience and its use is optional for clients of the nuget package.
-* The project [test/GlpkTest.csproj](https://github.com/microsoft/glpk-nuget/blob/main/test) that is used to perform basic
+* The project [test/GlpkTest.csproj](https://github.com/microsoft/glpk-nuget/blob/main/test) that contains basic
   tests of the GLPK builds.
 * The project [package/Glpk.Native.csproj](https://github.com/microsoft/glpk-nuget/blob/main/package) that is used solely to define
   and create a nuget package.
-* The [pipelines](https://github.com/microsoft/glpk-nuget/blob/main/pipelines) directory contains Azure DevOps pipeline definition
+* The [pipelines](https://github.com/microsoft/glpk-nuget/blob/main/pipelines) directory that contains Azure DevOps pipeline definition
   files for building, testing and packaging.
 
 # Building
