@@ -21,6 +21,10 @@ jobs:
     clean: true
     lfs: true
 
+  - script: chmod +x ./bld.sh
+    displayName: Prep bld.sh
+    workingDirectory: $(Build.SourcesDirectory)/build
+
   - script: ./bld.sh
     displayName: Build Glpk
     workingDirectory: $(Build.SourcesDirectory)/build
