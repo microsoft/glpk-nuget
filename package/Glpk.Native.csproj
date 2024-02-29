@@ -1,0 +1,50 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net6.0</TargetFrameworks>
+    <Title>GLPK binaries for various platforms</Title>
+
+    <!-- package -->
+    <PackageDescription>GLPK is a linear solver.</PackageDescription>
+    <PackageNotes>This includes GLPK dll files for 64 and 32 bit Windows, an so file for Linux (Ubuntu), and C# pinvoke interop code in GlpkNative.cs.</PackageNotes>
+
+    <PackageProjectUrl>https://github.com/microsoft/glpk-nuget</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+
+    <!-- source -->
+    <RepositoryUrl>https://github.com/microsoft/glpk-nuget</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryBranch>$(AssemblyVersionGitBranch)</RepositoryBranch>
+    <RepositoryCommit>$(AssemblyVersionGitSha)</RepositoryCommit>
+
+    <!-- legal -->
+    <Authors>Microsoft</Authors>
+    <Copyright>© Microsoft Corporation. All rights reserved.</Copyright>
+    <!-- <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance> -->
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- Don't include the build output in the package - it just contains the native binaries and cs file. -->
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <SignAssembly>false</SignAssembly>
+    <DebugType>None</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+    <SkipMDocGenerateDocs>true</SkipMDocGenerateDocs>
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Docs -->
+    <None Pack="True" Include="$(MSBuildThisFileDirectory)\README.md" PackagePath="README.md" Visible="False" />
+    <None Pack="True" Include="$(MSBuildThisFileDirectory)..\LICENSE.txt" PackagePath="LICENSE.txt" Visible="False" />
+
+    <!-- Windows -->
+    <None Pack="True" Include="$(MSBuildThisFileDirectory)../build/xout_x64/glpk_5_0.dll" PackagePath="runtimes\win-x64\native\glpk.dll" />
+    <None Pack="True" Include="$(MSBuildThisFileDirectory)../build/xout_x86/glpk_5_0.dll" PackagePath="runtimes\win-x86\native\glpk.dll" />
+    <!-- Linux -->
+    <None Pack="True" Include="$(MSBuildThisFileDirectory)../build/xout_linux/src/.libs/libglpk.so" PackagePath="runtimes\linux-x64\native\libglpk.so" />
+
+    <!-- Native API for C# clients -->
+    <None Pack="True" Include="$(MSBuildThisFileDirectory)../content/GlpkNative.cs" PackagePath="content\GlpkNative.cs" />
+  </ItemGroup>
+</Project>

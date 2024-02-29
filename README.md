@@ -7,8 +7,10 @@ This repository contains the unaltered source for GLPK 5.0 in the `glpk` directo
 `get-glpk.cmd` command. GLPK is licensed under GPL 3.0, as shown in the `LICENSE` file. The `LICENSE` file is an unaltered copy of
 the `glpk/glpk-5.0/COPYING` file.
 
-In addition to the source for GLPK, this repository contains scripts to build GLPK for various platforms and create and publish nuget
-packages containing the built binaries.
+In addition to the source for GLPK, this repository contains:
+* Scripts to build GLPK for various platforms in the `build` directory.
+* The project `test/GlpkTest.csporj` that is used to perform basic tests of the GLPK builds.
+* The project `package/Glpk.Native.csproj` that is used solely to define and create a nuget package.
 
 # Building
 
@@ -30,3 +32,20 @@ To build for Linux (or WSL), on a Linux machine:
   process as specified by the GLPK documentation, so may be customized accordingly.
 
 TODO: Complete this document once nuget generation and publishing is completed.
+
+# Testing
+
+To test the builds on either Windows or Linux:
+
+* First build GLPK as described above.
+* cd to the `test` directory.
+* Run `dotnet test GlpkTest.csproj`.
+
+# Packaging
+
+To create the nuget package:
+
+* Ensure that all builds have been performed in the same directory structure.
+* cd to the `package` directory.
+* Run `dotnet pack Glpk.Native.csproj`.
+* The package will be in `package/bin/Release/Glpk.Native.<ver>.nupkg`, were `<ver>` is the current version.

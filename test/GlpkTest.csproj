@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Platforms>x86;x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MSTest" Version="3.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\content\GlpkNative.cs" Link="GlpkNative.cs" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <GlpkDll>../build/xout_$(Platform)/glpk_5_0.dll</GlpkDll>
+    <GlpkSo>../build/xout_linux/src/.libs/libglpk.so</GlpkSo>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="$(GlpkDll)" Link="glpk.dll" Visible="false" Condition="Exists('$(GlpkDll)')">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(GlpkSo)" Link="libglpk.so" Visible="false" Condition="Exists('$(GlpkSo)')">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
