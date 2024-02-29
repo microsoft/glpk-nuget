@@ -8,7 +8,7 @@ This directory was populated by executing the [get-glpk.cmd](https://github.com/
 GLPK is licensed under GPL 3.0, as shown in the [LICENSE.txt](https://github.com/microsoft/glpk-nuget/blob/main/LICENSE.txt) file,
 which is and an unaltered copy of the [glpk/glpk-5.0/COPYING](https://github.com/microsoft/glpk-nuget/blob/main/glpk/glpk-5.0/COPYING) file.
 
-See the [GLPK pdf](https://github.com/microsoft/glpk-nuget/blob/main/glpk/glpk-5.0/docs/glpk.pdf) for documentation of the
+See the [GLPK pdf](https://github.com/microsoft/glpk-nuget/blob/main/glpk/glpk-5.0/doc/glpk.pdf) for documentation of the
 public API of GLPK.
 
 In addition to the source for GLPK, this repository contains:
