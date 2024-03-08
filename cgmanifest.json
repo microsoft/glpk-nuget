@@ -1,0 +1,14 @@
+{
+  "Registrations": [
+    {
+      "Component": {
+        "Type": "other",
+        "other": {
+          "name": "GLPK",
+          "version": "5.0",
+          "downloadUrl": "https://ftp.gnu.org/gnu/glpk/glpk-5.0.tar.gz"
+        }
+      }
+    }
+  ]
+}
