@@ -5,7 +5,7 @@
 
     <!-- package -->
     <PackageId>Glpk.Native</PackageId>
-    <PackageVersion>1.0.1</PackageVersion>
+    <PackageVersion>1.0.2</PackageVersion>
     <PackageDescription>GLPK is a linear solver licensed under GLPv3. This package contains native binaries and an optional C# raw interface declaration class.</PackageDescription>
     <PackageNotes>This includes GLPK dll files for 64 and 32 bit Windows, an so file for Linux (Ubuntu), and C# pinvoke interop code in GlpkNative.cs.</PackageNotes>
     <PackageProjectUrl>https://github.com/microsoft/glpk-nuget</PackageProjectUrl>
