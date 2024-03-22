@@ -5,7 +5,7 @@
 
     <!-- package -->
     <PackageId>Glpk.Native</PackageId>
-    <PackageVersion>1.0.0</PackageVersion>
+    <PackageVersion>1.0.1</PackageVersion>
     <PackageDescription>GLPK is a linear solver licensed under GLPv3. This package contains native binaries and an optional C# raw interface declaration class.</PackageDescription>
     <PackageNotes>This includes GLPK dll files for 64 and 32 bit Windows, an so file for Linux (Ubuntu), and C# pinvoke interop code in GlpkNative.cs.</PackageNotes>
     <PackageProjectUrl>https://github.com/microsoft/glpk-nuget</PackageProjectUrl>
@@ -47,6 +47,6 @@
     <None Pack="True" Include="$(MSBuildThisFileDirectory)../build/xout_linux/src/.libs/libglpk.so" PackagePath="runtimes\linux-x64\native\libglpk.so" />
 
     <!-- Native API for C# clients -->
-    <None Pack="True" Include="$(MSBuildThisFileDirectory)../content/GlpkNative.cs" PackagePath="content\GlpkNative.cs" />
+    <Content Include="$(MSBuildThisFileDirectory)../content/GlpkNative.cs" BuildAction="Compile" />
   </ItemGroup>
 </Project>

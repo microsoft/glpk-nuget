@@ -1,5 +1,8 @@
 ﻿﻿// Copyright (c) Microsoft. All rights reserved.
 
+// define NO_GLPKNATIVE to exclude this content when building.
+#if !NO_GLPKNATIVE
+
 using System;
 using System.Runtime.InteropServices;
 
@@ -204,3 +207,5 @@ internal static class GlpkNative
     [DllImport(Library)] public static extern double glp_mip_obj_val(IntPtr prob);
     [DllImport(Library)] public static extern double glp_mip_col_val(IntPtr prob, int j);
 }
+
+#endif
